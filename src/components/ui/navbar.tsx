@@ -26,6 +26,14 @@ const navbar = () => {
             path : "/"
         },
         {
+            name : "blog",
+            path : "/"
+        },
+        {
+            name : "Offred",
+            path : "/"
+        },
+        {
             name : "Sign In",
             path : "/"
         },
@@ -37,7 +45,7 @@ const navbar = () => {
 
     return (
         <nav>
-            <div className=" bg-black p-3 space-y-5">
+            <div className=" bg-black p-3 space-y-1">
                 <p className=" text-orange-300">Free Standard Shipping for Orders Over $50. <span className=" underline">Learn More</span></p>
                 <div className=" text-white flex justify-between items-center gap-5 p-5">
                     <div className=" flex-1">

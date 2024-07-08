@@ -1,9 +1,8 @@
-import React from 'react';
-
+import Hero from "@/components/ui/hero";
 const Home = () => {
     return (
-        <div>
-            
+        <div className="mt-5">
+            <Hero/>
         </div>
     );
 };
