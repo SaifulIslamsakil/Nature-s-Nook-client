@@ -30,7 +30,7 @@ const Footer = () => {
           <p className="text-sm">Sign up for exclusive offers, original stories, events and more.</p>
           <div className="flex space-x-2">
             <input type="email" className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-blue-500 focus:ring-1" placeholder="Your email" />
-            <button className="bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-700">SUBSCRIBE</button>
+            <button className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700">SUBSCRIBE</button>
           </div>
         </div>
       </div>

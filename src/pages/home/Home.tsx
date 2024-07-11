@@ -1,21 +1,21 @@
-import Hero from "@/components/ui/hero";
-import Aboute from "@/components/ui/aboute";
-import SpecialProducts from "@/components/ui/specialProducts";
-import Categories from "@/components/ui/categories";
-import Featured from "@/components/ui/featured";
-import Collections from "@/components/ui/Collections";
 import Faq from "@/components/ui/Faq";
+import Hero from "@/components/ui/Hero";
+import Aboute from "@/components/ui/Aboute";
+import SpecialProducts from "@/components/ui/SpecialProducts";
+import Collections from "@/components/ui/Collections";
+import Categories from "@/components/ui/Categories";
 import Reviw from "@/components/ui/Reviw";
+import Featured from "../../components/ui/Featured"
 const Home = () => {
     return (
-        <div className="mt-5 ">
+        <div className=" lg:space-y-10">
             <Hero/>
             <Aboute />
             <SpecialProducts />
             <Collections />
             <Categories />
             <Reviw />
-            <Featured />
+            <Featured/>
             <Faq />    
 
         </div>

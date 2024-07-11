@@ -2,7 +2,7 @@ import { Card, CardContent } from "./card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
 
 
-const specialProducts = () => {
+const SpecialProducts = () => {
 
     const products = [
         {
@@ -60,9 +60,9 @@ const specialProducts = () => {
         // Add more products as needed
     ];
     return (
-        <div className=" py-10">
+        <div className=" p-5 lg:pt-10 ">
             <h2 className=" text-center font-semibold text-3xl">Special <span className=" text-orange-500">Products</span></h2>
-            <div className=" pt-10 flex justify-center">
+            <div className=" md:pt-10 flex justify-center">
                 <Carousel
                     opts={{
                         align: "start",
@@ -85,12 +85,12 @@ const specialProducts = () => {
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className="absolute -left-7 p-2 text-white bg-black bg-opacity-50 rounded-full hover:bg-opacity-75" />
-                    <CarouselNext className="absolute -right-7 p-2 text-white bg-black bg-opacity-50 rounded-full hover:bg-opacity-75" />
+                    <CarouselPrevious className="absolute -left-3 lg:-left-7 lg:p-2 text-white bg-black bg-opacity-50 rounded-full hover:bg-opacity-75" />
+                    <CarouselNext className="absolute right-0 lg:-right-7 lg:p-2 text-white bg-black bg-opacity-50 rounded-full hover:bg-opacity-75" />
                 </Carousel>
             </div>
         </div>
     );
 };
 
-export default specialProducts;
+export default SpecialProducts;

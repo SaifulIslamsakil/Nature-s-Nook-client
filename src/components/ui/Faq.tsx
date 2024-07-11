@@ -43,7 +43,7 @@ const Faq = () => {
         <div className="p-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-3xl font-semibold mb-6 text-center text-gray-700">Frequently Asked <span className=" text-orange-500">Questions</span></h2>
-                <div className="divide-y divide-gray-300">
+                <div className="divide-y divide-gray-300 md:pt-10">
                     {faqs.map((faq, index) => (
                         <div key={index} className="py-6">
                             <button
