@@ -14,7 +14,7 @@ const discover = () => {
     ];
     return (
         <div className="max-w-7xl mx-auto p-6">
-            <h2 className="text-3xl font-bold mb-6 text-center">Explore Our <span className=" text-orange-500"> Categories</span></h2>
+            <h2 className="text-3xl font-semibold mb-6 text-center">Explore Our <span className=" text-orange-500"> Categories</span></h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-5">
                 {categories.map(category => (
                     <div key={category.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl">
