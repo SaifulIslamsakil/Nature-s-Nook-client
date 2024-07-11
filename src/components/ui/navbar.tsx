@@ -39,8 +39,8 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-between text-black relative ">
-                <div className=" hidden  lg:flex items-center gap-5 border p-5 text-lg">
+            <div className="flex justify-between items-center text-black relative ">
+                <div className=" hidden  lg:flex items-center gap-5 border p-6 text-lg">
                     <div className="flex items-center gap-2">
                         <p className=" text-orange-600 text-xl"><RiMenuUnfoldLine /></p>
                         <p>Shop by Category</p>
