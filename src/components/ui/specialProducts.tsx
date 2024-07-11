@@ -60,9 +60,9 @@ const specialProducts = () => {
         // Add more products as needed
     ];
     return (
-        <div className=" py-14">
+        <div className=" py-10">
             <h2 className=" text-center font-semibold text-3xl">Special <span className=" text-orange-500">Products</span></h2>
-            <div className="py-10 flex justify-center">
+            <div className=" pt-10 flex justify-center">
                 <Carousel
                     opts={{
                         align: "start",
