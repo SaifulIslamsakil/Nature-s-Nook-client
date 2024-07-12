@@ -28,10 +28,6 @@ const Menu = () => {
             path: "/g"
         },
         {
-            name: "Sign In",
-            path: "/gf"
-        },
-        {
             name: "Register",
             path: "/ll"
         },
