@@ -1,7 +1,7 @@
 const Footer = () => {
     
     return (
-        <footer className="bg-black py-8 text-gray-200">
+        <footer className="bg-black pt-8 text-gray-200">
       <div className="container mx-auto flex flex-wrap justify-between">
         <div className="w-full md:w-1/2 lg:w-1/4 mb-8 md:mb-0">
           <h3 className="font-bold text-lg mb-4">CONTACT</h3>
@@ -28,9 +28,9 @@ const Footer = () => {
         <div className="w-full md:w-1/2 lg:w-1/4">
           <h3 className="font-bold text-lg mb-4">NEWSLETTER</h3>
           <p className="text-sm">Sign up for exclusive offers, original stories, events and more.</p>
-          <div className="flex space-x-2">
+          <div className=" space-y-3 md:space-y-0 md:flex space-x-2 my-2 ">
             <input type="email" className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-blue-500 focus:ring-1" placeholder="Your email" />
-            <button className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700">SUBSCRIBE</button>
+            <button className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 ">SUBSCRIBE</button>
           </div>
         </div>
       </div>
