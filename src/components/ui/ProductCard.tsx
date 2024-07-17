@@ -8,14 +8,12 @@ const ProductCard = ({ product }: { product: TProduct }) => {
             <img src={product.image[0]} alt={product.name} className="w-full h-48 object-cover" />
             <div className="p-4 space-y-3">
                 <h3 className="text-lg font-semibold text-gray-700">{product.name}</h3>
-                <p className="text-gray-500">{product.description.length > 150 ? product.description.slice(0, 150) + "......" : product.description}</p>
-                <p className="mt-2 text-xl font-semibold text-gray-800">${product.price}</p>
+                <p className="text-gray-500 text-justify">{product.description.length > 120 ? product.description.slice(0, 120) + "......" : product.description}</p>
+                <p className="text-xl font-semibold text-gray-800">${product.price}</p>
                 <div className=" flex justify-between">
+                        <Button className=" bg-orange-500 ">Add To Cart</Button>
                     <Link to={`/product/product-detiles/${product._id}`}>
-                        <Button className=" bg-orange-500 mt-3">Add To Cart</Button>
-                    </Link>
-                    <Link to={`/product/product-detiles/${product._id}`}>
-                        <Button className=" hover:bg-orange-500 mt-3">See More</Button>
+                        <Button className=" hover:bg-orange-500 ">See More</Button>
                     </Link>
                 </div>
             </div>
