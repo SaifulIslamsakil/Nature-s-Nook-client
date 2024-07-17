@@ -17,7 +17,7 @@ const Categories: React.FC = () => {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:pt-10">
                 {categories.map((category) => (
-                    <Link key={category._id} to={`/products?${category.name}`}>
+                    <Link key={category._id} to={`/products?filter=${category.name}`}>
                         <div  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl">
                             <img src={category.image} alt={category.name} className="w-full h-48 object-cover" />
                             <div className="p-4">
