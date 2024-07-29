@@ -11,7 +11,7 @@ const Categories: React.FC = () => {
     if (error) return <p>Error loading categories.</p>;
     const categories: TCategory[] = data?.data || [];
     return (
-        <div className="max-w-7xl mx-auto p-6">
+        <div className="p-5 pt-10 space-y-10">
             <h2 className="text-3xl font-semibold mb-6 text-center">
                 Explore Our <span className="text-orange-500">Categories</span>
             </h2>

@@ -1,30 +1,66 @@
 import { Button } from '@/components/ui/button';
+import ProductCard from '@/components/ui/ProductCard';
 import { TProduct } from '@/interface/interface';
-import { useGetSingelProductQuery } from '@/redux/feature/product/productApi';
+import { useGetProductQuery, useGetSingelProductQuery } from '@/redux/feature/product/productApi';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 const ProductDetiles = () => {
     const [quantity, setQuantity] = useState<number>(1);
-    const {id} = useParams()
-    const { data} = useGetSingelProductQuery(id)
-    const product:TProduct = data?.data
+    const { id } = useParams();
+    const { data: productData, error, isLoading } = useGetSingelProductQuery(id);
+    // const { data: reviewsData } = useGetProductReviewsQuery(id);
+    const [mainImage, setMainImage] = useState<string>('');
+
+    const product: TProduct = productData?.data || [];
+    const filter = `filter=${product.category}`;
+    const { data } = useGetProductQuery(filter);
+    const relatedProduct: TProduct[] = data?.data || [];
+    const notMacthProduct = relatedProduct.filter(ele => ele.name !== product.name);
+
+    if (!mainImage && product.image && product.image.length > 0) {
+        setMainImage(product.image[0]);
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error || !productData) {
+        return <div>Error loading product data.</div>;
+    }
+
+    const { name, price, image, description } = product;
+
     return (
-        <div className="bg-white py-8">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white py-8 px-4">
+            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Main Product Image */}
                     <div className="col-span-1">
-                        <img className="w-full h-96 object-cover rounded-md shadow-md" src={product?.image[1]} alt="Product" />
+                        {mainImage ? (
+                            <img className="w-full h-96 object-cover rounded-md shadow-md" src={mainImage} alt="Product" />
+                        ) : (
+                            <div className="w-full h-96 bg-gray-200 rounded-md shadow-md flex items-center justify-center">
+                                <p className="text-gray-500">No image available</p>
+                            </div>
+                        )}
                         <div className="flex mt-4 space-x-2">
-                            {product?.image.map((img, index) => (
-                                <img key={index} className="w-20 h-20 object-cover rounded-md shadow-md cursor-pointer" src={img} alt={`Thumbnail ${index + 1}`} />
+                            {image && image.map((img, id) => (
+                                <img
+                                    key={id}
+                                    className="w-20 h-20 object-cover rounded-md shadow-md cursor-pointer"
+                                    src={img}
+                                    alt={`Thumbnail ${id + 1}`}
+                                    onClick={() => setMainImage(img)}
+                                />
                             ))}
                         </div>
                     </div>
                     {/* Product Details */}
                     <div className="col-span-1 p-4">
-                        <h1 className="text-3xl font-semibold text-gray-900">{product?.name}</h1>
-                        <p className="text-xl text-gray-700 mt-2">${product?.price}</p>
+                        <h1 className="text-3xl font-semibold text-gray-900">{name}</h1>
+                        <p className="text-xl text-gray-700 mt-2">${price}</p>
                         <p className="mt-2 text-gray-500">Tax included | <span className="text-blue-500 cursor-pointer">Shipping</span> calculated at checkout.</p>
                         <p className="mt-4 text-gray-700">By <span className="text-blue-500 cursor-pointer">Jack Wolfskin</span></p>
                         <div className="mt-4">
@@ -46,7 +82,7 @@ const ProductDetiles = () => {
                         <div className="mt-4 space-y-2">
                             <details className="border-t pt-2">
                                 <summary className="cursor-pointer">Description</summary>
-                                <p className="mt-2 text-gray-600">{product?.description}</p>
+                                <p className="mt-2 text-gray-600">{description}</p>
                             </details>
                             <details className="border-t pt-2">
                                 <summary className="cursor-pointer">Shipping & Returns</summary>
@@ -60,7 +96,33 @@ const ProductDetiles = () => {
                     </div>
                 </div>
             </div>
-           
+            <div className="max-w-7xl mx-auto mb-5 ">
+                <h2 className="text-2xl font-semibold text-gray-900">Customer Reviews</h2>
+              
+                    <div className="mt-4 space-y-4">
+                     
+                            <div key={"review._id"} className="bg-gray-100 p-4 rounded-md shadow-md">
+                                <h3 className="text-lg font-semibold text-gray-800">{"review.customerName"}</h3>
+                                <p className="text-gray-600">{"review.comment"}</p>
+                                <div className="flex items-center mt-2">
+                                    {/* {[...Array(5)].map((_, index) => (
+                                        
+                                            ★
+                                        </span>
+                                    ))} */}
+                                    <span  className={`h-4 w-4  'text-yellow-400' : 'text-gray-300'} inline-block`}>ss</span>
+                                </div>
+                            </div>
+            
+                    </div>
+                {/* ) : (
+                    <p className="mt-4 text-gray-600">No reviews yet. Be the first to review this product!</p>
+                )} */}
+            </div>
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {notMacthProduct.map(item => <ProductCard key={item._id} product={item} />)}
+            </div>
+        
         </div>
     );
 };

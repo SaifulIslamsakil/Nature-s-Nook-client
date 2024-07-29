@@ -60,7 +60,7 @@ const SpecialProducts = () => {
         // Add more products as needed
     ];
     return (
-        <div className=" p-5 lg:pt-10 ">
+        <div className=" p-5 pt-10 lg:pt-5 space-y-10 md:space-y-3">
             <h2 className=" text-center font-semibold text-3xl">Special <span className=" text-orange-500">Products</span></h2>
             <div className=" md:pt-10 flex justify-center">
                 <Carousel

@@ -63,7 +63,7 @@ const Navbar = () => {
               <IoIosArrowDown />
             </span>
           </div>
-          <div className="hidden lg:flex p-5 border flex-1 justify-end">
+          <div className="hidden lg:flex p-6 border flex-1 justify-end">
             <Menu />
           </div>
           <div className={`${menuToggle ? 'block' : 'hidden'} w-full lg:hidden md:w-80 h-screen bg-white shadow-2xl absolute border p-5 z-50 left-0 top-0`}>

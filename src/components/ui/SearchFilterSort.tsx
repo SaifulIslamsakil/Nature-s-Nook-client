@@ -9,7 +9,6 @@ import { TCategory } from "@/interface/interface";
 import { useForm } from "react-hook-form";
 
 interface SearchFilterSortProps {
-  query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -19,9 +18,6 @@ const SearchFilterSort: React.FC<SearchFilterSortProps> = ({ setQuery }) => {
   const [search, setSearch] = useState("")
   const { register, handleSubmit } = useForm();
   const { data } = useGetCategoryQuery(undefined)
-
-
-  console.log(search)
   useEffect(() => {
     if (filter) {
       setQuery(`filter=${filter}`);

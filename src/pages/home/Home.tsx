@@ -8,7 +8,7 @@ import Reviw from "@/components/ui/Reviw";
 import Featured from "../../components/ui/Featured"
 const Home = () => {
     return (
-        <div className=" lg:space-y-10">
+        <div className=" lg:space-y-10 ">
             <Hero/>
             <Aboute />
             <SpecialProducts />
