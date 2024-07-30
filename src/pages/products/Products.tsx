@@ -7,11 +7,8 @@ import { useGetProductQuery } from "@/redux/feature/product/productApi";
 import { useState } from "react";
 const Products = () => {
     const [query, setQuery] = useState("")    
-    const { data, error, isLoading } = useGetProductQuery(query)
-    if (error && isLoading) {
-        alert("error")
-    }
-    const product: TProduct[] = data?.data
+    const { data, isLoading } = useGetProductQuery(query)
+    const product: TProduct[] = data?.data || []
     return (
         <div className=" mt-6">
             <ProductsHero />
@@ -22,9 +19,9 @@ const Products = () => {
                             Our <span className="text-orange-500">Products</span>
                         </h2>
                         <SearchFilterSort setQuery={setQuery} />
-                        <div className="grid  md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <div className="grid  md:grid-cols-3 lg:grid-cols-5 gap-4">
                             {
-                                product?.map(item => <ProductCard key={item._id} product={item} />)
+                              !isLoading?  product?.map(item => <ProductCard key={item._id} product={item} />) :"Lodding...."
                             }
                         </div>
                     </div>

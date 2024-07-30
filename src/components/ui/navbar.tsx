@@ -8,9 +8,11 @@ import { FaCartShopping } from "react-icons/fa6";
 import { ImCross } from "react-icons/im";
 import { AiOutlineMenuFold } from "react-icons/ai";
 import Menu from "./Menu";
+import { useAppSelector } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
 
 const Navbar = () => {
-
+    const state = useAppSelector((state:RootState)=> state.addToCart)
     const [menuToggle, setMenuToggle] = useState<boolean>(false)
 
     return (
@@ -42,7 +44,7 @@ const Navbar = () => {
                   <span className="text-lg"><IoIosCall /></span> 1-800-123-4567
                 </li>
                 <li className="flex items-center gap-1 hover:text-orange-500 text-orange-500 text-2xl">
-                  <span className="text-lg"><FaCartShopping /></span> (0)
+                  <span className="text-lg"><FaCartShopping /></span> ({state.length})
                 </li>
               </ul>
             </div>

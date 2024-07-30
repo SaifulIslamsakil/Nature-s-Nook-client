@@ -1,17 +1,20 @@
 import { Button } from '@/components/ui/button';
 import ProductCard from '@/components/ui/ProductCard';
+import ProductRatingAndReview from '@/components/ui/ProductRatingAndReview';
 import { TProduct } from '@/interface/interface';
+import { addToCart } from '@/redux/feature/addToCart/addToCartSilice';
 import { useGetProductQuery, useGetSingelProductQuery } from '@/redux/feature/product/productApi';
+import { useAppDispatch } from '@/redux/hooks';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const ProductDetiles = () => {
+    const dispatch = useAppDispatch()
     const [quantity, setQuantity] = useState<number>(1);
     const { id } = useParams();
     const { data: productData, error, isLoading } = useGetSingelProductQuery(id);
     // const { data: reviewsData } = useGetProductReviewsQuery(id);
     const [mainImage, setMainImage] = useState<string>('');
-
     const product: TProduct = productData?.data || [];
     const filter = `filter=${product.category}`;
     const { data } = useGetProductQuery(filter);
@@ -33,8 +36,8 @@ const ProductDetiles = () => {
     const { name, price, image, description } = product;
 
     return (
-        <div className="bg-white py-8 px-4">
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="space-y-5 bg-slate-50">
+            <div className="max-w-7xl mx-auto px-5  py-5 shadow-md bg-white">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Main Product Image */}
                     <div className="col-span-1">
@@ -72,7 +75,7 @@ const ProductDetiles = () => {
                             </div>
                         </div>
                         <div className="mt-6">
-                            <Button variant="outline" className="w-full py-4 rounded-md hover:bg-black hover:text-white">ADD TO CART</Button>
+                            <Button onClick={()=> dispatch(addToCart(product))} variant="outline" className="w-full py-4 rounded-md hover:bg-black hover:text-white">ADD TO CART</Button>
                             <button className="w-full text-white bg-orange-500 py-3 rounded-md shadow-md hover:bg-orange-600 mt-4">Buy with PayPal</button>
                         </div>
                         <div className="mt-4 text-blue-500 cursor-pointer">
@@ -96,33 +99,13 @@ const ProductDetiles = () => {
                     </div>
                 </div>
             </div>
-            <div className="max-w-7xl mx-auto mb-5 ">
-                <h2 className="text-2xl font-semibold text-gray-900">Customer Reviews</h2>
-              
-                    <div className="mt-4 space-y-4">
-                     
-                            <div key={"review._id"} className="bg-gray-100 p-4 rounded-md shadow-md">
-                                <h3 className="text-lg font-semibold text-gray-800">{"review.customerName"}</h3>
-                                <p className="text-gray-600">{"review.comment"}</p>
-                                <div className="flex items-center mt-2">
-                                    {/* {[...Array(5)].map((_, index) => (
-                                        
-                                            ★
-                                        </span>
-                                    ))} */}
-                                    <span  className={`h-4 w-4  'text-yellow-400' : 'text-gray-300'} inline-block`}>ss</span>
-                                </div>
-                            </div>
-            
-                    </div>
-                {/* ) : (
-                    <p className="mt-4 text-gray-600">No reviews yet. Be the first to review this product!</p>
-                )} */}
+            <div>
+                <ProductRatingAndReview />
             </div>
-            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4 bg-white p-5">
                 {notMacthProduct.map(item => <ProductCard key={item._id} product={item} />)}
             </div>
-        
+
         </div>
     );
 };
