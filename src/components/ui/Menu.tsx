@@ -16,8 +16,8 @@ const Menu = () => {
             path: "/products"
         },
         {
-            name: "Offred",
-            path: "/b"
+            name: "Products manages",
+            path: "/product-management"
         },
         {
             name: "Blog",

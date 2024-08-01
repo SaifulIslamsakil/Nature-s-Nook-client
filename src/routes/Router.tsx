@@ -26,7 +26,7 @@ const Router = createBrowserRouter([
                 element:<ProductDetiles/>
             },
             {
-                path:"/products/product-management",
+                path:"/product-management",
                 element:<ProductManagement/>
             },
             {
