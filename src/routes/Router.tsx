@@ -18,23 +18,23 @@ const Router = createBrowserRouter([
                 element:<Home/>
             },
             {
-                path:"/products",
+                path:"products",
                 element:<Products/>
             },
             {
-                path:"/product/product-detiles/:id",
+                path:"product/product-detiles/:id",
                 element:<ProductDetiles/>
             },
             {
-                path:"/product-management",
+                path:"product-management",
                 element:<ProductManagement/>
             },
             {
-                path:"/products/cart",
+                path:"cart",
                 element:<Cart/>
             },
             {
-                path:"/products/checkout",
+                path:"checkout",
                 element:<Checkout/>
             },
             {

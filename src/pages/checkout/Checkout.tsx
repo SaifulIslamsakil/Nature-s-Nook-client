@@ -1,6 +1,6 @@
 const Checkout = () => {
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-5 bg-slate-50">
             <h1 className="text-2xl font-bold mb-4">Checkout</h1>
             <div className="flex flex-col lg:flex-row gap-4">
 
