@@ -18,32 +18,39 @@ import {
 import { Textarea } from "./textarea";
 import { useGetCategoryQuery } from "@/redux/feature/category/categoryApi";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { TCategory } from "@/interface/interface";
-
-type Inputs = {
-    name: string;
-    category: string;
-    price: number;
-    inStock: number;
-    type: string;
-    img1: string;
-    img2: string;
-    img3: string;
-    description: string;
-}
+import { Inputs, TCategory } from "@/interface/interface";
+import { useState } from "react";
+import { useCreateProductMutation } from "@/redux/feature/product/productApi";
+import Swal from "sweetalert2";
 
 const ProductForm = ({ setFormTigger }: { setFormTigger: React.Dispatch<React.SetStateAction<boolean>> }) => {
     const { data } = useGetCategoryQuery(undefined);
+    const [createProduct] = useCreateProductMutation()
+    const [category, setCategory] = useState<string>("")
+    const [type, setType] = useState<string>("")
     const categories: TCategory[] = data?.data || [];
-
     const { register, handleSubmit } = useForm<Inputs>();
+    const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+        const productInfo = {
+            name: formData.name,
+            category: category,
+            description: formData.description,
+            image: ["https://i.ibb.co/zbMk8jR/download-12.jpg", "https://i.ibb.co/529PtDv/download-11.jpg", "https://i.ibb.co/XVP18Lq/download-15.jpg"],
+            price: Number(formData.price),
+            inStock: Number(formData.inStock),
+            productType: type,
+        }
+        console.log(productInfo)
+        const sendDataIntoDatabase = await createProduct(productInfo)
+        if(sendDataIntoDatabase.data.success){
+            Swal.fire({
+                title: "Good job!",
+                text: sendDataIntoDatabase?.data?.message,
+                icon: "success"
+              }); 
 
-    const onSubmit: SubmitHandler<Inputs> = (formData) => {
-        // Handle form submission logic here, e.g., API call
-        console.log(formData);
-
-        // Optionally, you can reset the form after submission
-        // reset();
+              setFormTigger(false)
+        }
     };
 
     return (
@@ -62,13 +69,13 @@ const ProductForm = ({ setFormTigger }: { setFormTigger: React.Dispatch<React.Se
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-6">
                                 <Label>Category</Label>
-                                <Select>
-                                    <SelectTrigger  id="framework">
+                                <Select onValueChange={setCategory}>
+                                    <SelectTrigger id="framework">
                                         <SelectValue placeholder="Select Category" />
                                     </SelectTrigger>
-                                    <SelectContent  {...register("category")}  position="popper">
+                                    <SelectContent position="popper" >
                                         {categories.map((item) => (
-                                            <SelectItem key={item._id} value={item.name}>
+                                            <SelectItem key={item._id} value={item.name} >
                                                 {item.name}
                                             </SelectItem>
                                         ))}
@@ -85,9 +92,9 @@ const ProductForm = ({ setFormTigger }: { setFormTigger: React.Dispatch<React.Se
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-4">
                                 <Label>Type</Label>
-                                <Select >
-                                    <SelectTrigger {...register("type")}>
-                                        <SelectValue   placeholder="Select Type" />
+                                <Select onValueChange={setType}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select Type" />
                                     </SelectTrigger>
                                     <SelectContent position="popper">
                                         <SelectItem value="offered">Offered</SelectItem>

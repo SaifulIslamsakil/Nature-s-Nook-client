@@ -29,6 +29,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.24.1",
     "react-toastify": "^10.0.5",
+    "sweetalert2": "^11.12.4",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7"
   },

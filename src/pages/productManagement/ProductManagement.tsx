@@ -6,13 +6,34 @@ import { FaPlus } from "react-icons/fa6";
 import { TProduct } from "@/interface/interface";
 import ProductForm from "@/components/ui/ProductForm";
 import { useState } from "react";
+import Swal from "sweetalert2"
 const ProductManagement = () => {
     const [formTigger, setFormTigger] = useState(false)
     const [deleteProduct] = useProductDeleteMutation()
     const { data, isLoading } = useGetProductQuery("")
     const product: TProduct[] = data?.data
     const handelProductDelete = async (id: string) => {
-        deleteProduct(id)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const delectedData = await deleteProduct(id)
+                if (delectedData?.data?.success) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: delectedData?.data?.message,
+                        icon: "success"
+                    });
+                }
+            }
+        });
+
 
     }
     return (
@@ -20,7 +41,7 @@ const ProductManagement = () => {
             <div className="container mx-auto p-4">
                 <div className=" flex justify-between items-center">
                     <p className="text-left mb-4 text-xl font-semibold">A list of your recent invoices.</p>
-                    <p onClick={()=> setFormTigger(true)} className="text-left mb-4 flex items-center gap-2 bg-orange-500 text-white hover:bg-orange-600 p-2 rounded-lg"><span >Add New</span><FaPlus /> </p>
+                    <p onClick={() => setFormTigger(true)} className="text-left mb-4 flex items-center gap-2 bg-orange-500 text-white hover:bg-orange-600 p-2 rounded-lg"><span >Add New</span><FaPlus /> </p>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white">
@@ -52,7 +73,7 @@ const ProductManagement = () => {
                     </table>
                 </div>
             </div>
-            <div className={`w-full h-full bg-black bg-opacity-50 absolute -top-52 left-0 flex items-center justify-center ${formTigger? "block":"hidden"}`}>
+            <div className={`w-full h-screen bg-black bg-opacity-70 absolute -top-48 left-0 flex items-center justify-center duration-2000  ${formTigger ? "block" : "hidden"}`}>
                 <ProductForm setFormTigger={setFormTigger} />
             </div>
         </div>

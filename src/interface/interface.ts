@@ -15,3 +15,12 @@ export type TProduct = {
     productType: "special" | "Special" | "offerd";
     isDeleted: boolean;
 }
+export type Inputs = {
+    name: string;
+    price: number;
+    inStock: number;
+    img1: string;
+    img2: string;
+    img3: string;
+    description: string;
+}

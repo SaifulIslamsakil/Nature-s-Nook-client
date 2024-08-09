@@ -11,7 +11,6 @@ import { useForm } from "react-hook-form";
 interface SearchFilterSortProps {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
-
 const SearchFilterSort: React.FC<SearchFilterSortProps> = ({ setQuery }) => {
   const [filter, setFilter] = useState("")
   const [sort, setSort] = useState("")
