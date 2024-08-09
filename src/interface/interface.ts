@@ -24,3 +24,7 @@ export type Inputs = {
     img3: string;
     description: string;
 }
+export type TFormAction = {
+    type: string;
+    id?: string
+}

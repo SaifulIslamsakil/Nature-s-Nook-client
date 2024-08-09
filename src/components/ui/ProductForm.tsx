@@ -20,17 +20,23 @@ import { useGetCategoryQuery } from "@/redux/feature/category/categoryApi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Inputs, TCategory } from "@/interface/interface";
 import { useState } from "react";
-import { useCreateProductMutation } from "@/redux/feature/product/productApi";
+import { useCreateProductMutation, useProductUpdateMutation } from "@/redux/feature/product/productApi";
 import Swal from "sweetalert2";
 
-const ProductForm = ({ setFormTigger }: { setFormTigger: React.Dispatch<React.SetStateAction<boolean>> }) => {
+type Tprops = {
+    setFormTigger: React.Dispatch<React.SetStateAction<boolean>>,
+    formAction: string
+}
+const ProductForm = ({ setFormTigger, formAction }: Tprops) => {
     const { data } = useGetCategoryQuery(undefined);
     const [createProduct] = useCreateProductMutation()
+    const [updateProduct] = useProductUpdateMutation()
     const [category, setCategory] = useState<string>("")
     const [type, setType] = useState<string>("")
     const categories: TCategory[] = data?.data || [];
     const { register, handleSubmit } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+        let response
         const productInfo = {
             name: formData.name,
             category: category,
@@ -40,16 +46,23 @@ const ProductForm = ({ setFormTigger }: { setFormTigger: React.Dispatch<React.Se
             inStock: Number(formData.inStock),
             productType: type,
         }
-        console.log(productInfo)
-        const sendDataIntoDatabase = await createProduct(productInfo)
-        if(sendDataIntoDatabase.data.success){
+        if (formAction.split(",")[0] === "update product") {
+            const updateProductInfo = {
+                ...productInfo, id: formAction.split(",")[1]
+            }
+            response = await updateProduct(updateProductInfo)
+        } else {
+            response = await createProduct(productInfo)
+        }
+
+        if (response?.data?.success) {
             Swal.fire({
                 title: "Good job!",
-                text: sendDataIntoDatabase?.data?.message,
+                text: response?.data?.message,
                 icon: "success"
-              }); 
+            });
 
-              setFormTigger(false)
+            setFormTigger(false)
         }
     };
 
@@ -57,8 +70,8 @@ const ProductForm = ({ setFormTigger }: { setFormTigger: React.Dispatch<React.Se
         <div className="bg-white rounded-lg p-4">
             <Card>
                 <CardHeader>
-                    <CardTitle>Create New Product</CardTitle>
-                    <CardDescription>Deploy your new product in one-click.</CardDescription>
+                    <CardTitle className=" uppercase">{formAction.split(",")[0]}</CardTitle>
+                    <CardDescription>Deploy your product in one-click.</CardDescription>
                 </CardHeader>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent>
