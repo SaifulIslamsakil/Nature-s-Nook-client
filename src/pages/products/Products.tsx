@@ -10,7 +10,7 @@ const Products = () => {
     const { data, isLoading } = useGetProductQuery(query)
     const product: TProduct[] = data?.data || []
     return (
-        <div className=" mt-6">
+        <div className=" mt-6 border">
             <ProductsHero />
             <div>
                 <div className="bg-white py-8">

@@ -7,11 +7,14 @@ const productApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: payload
             })
+
         }),
         getProduct: builder.query({
             query: (payload) => ({
                 url: `/product?${payload}`,
                 method: "GET",
+                providesTags: ['product'],
+
             })
         }),
         getSingelProduct: builder.query({
@@ -27,7 +30,7 @@ const productApi = baseApi.injectEndpoints({
             })
         }),
         productUpdate: builder.mutation({
-            query: ({id,...payload}) => ({
+            query: ({ id, ...payload }) => ({
                 url: `/product/product-update/${id}`,
                 method: "PUT",
                 body: payload

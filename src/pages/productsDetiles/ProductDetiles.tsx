@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom';
 
 const ProductDetiles = () => {
     const dispatch = useAppDispatch()
-    const [quantity, setQuantity] = useState<number>(1);
     const { id } = useParams();
     const { data: productData, error, isLoading } = useGetSingelProductQuery(id);
     // const { data: reviewsData } = useGetProductReviewsQuery(id);
@@ -69,9 +68,9 @@ const ProductDetiles = () => {
                         <div className="mt-4">
                             <label className="text-gray-700">Quantity:</label>
                             <div className="flex items-center mt-2">
-                                <button onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)} className="p-2 border border-gray-300 rounded-l-md">-</button>
-                                <input type="text" readOnly value={quantity} className="w-12 text-center border-t border-b border-gray-300" />
-                                <button onClick={() => setQuantity(quantity + 1)} className="p-2 border border-gray-300 rounded-r-md">+</button>
+                                <button  className="p-2 border border-gray-300 rounded-l-md">-</button>
+                                <input type="text" readOnly value={product?.quantity} className="w-12 text-center border-t border-b border-gray-300" />
+                                <button  className="p-2 border border-gray-300 rounded-r-md">+</button>
                             </div>
                         </div>
                         <div className="mt-6">

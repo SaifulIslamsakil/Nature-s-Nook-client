@@ -9,8 +9,15 @@ import 'react-toastify/dist/ReactToastify.css';
 const ProductCard = ({ product }: { product: TProduct }) => {
     const dispatch = useAppDispatch()
     const handelAddProductInCart = () => {
-        dispatch(addToCart(product))
+       try {
+        const productData = {...product, quantity : 1}
+        dispatch(addToCart(productData))
         toast.success("your product added to cart")
+       } catch (error) {
+        if(error){
+            toast.error("this product allrady added in your card")
+        }
+       }
     }
     return (
         <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 relative">

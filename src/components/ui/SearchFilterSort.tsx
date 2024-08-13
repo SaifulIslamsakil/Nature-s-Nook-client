@@ -12,11 +12,16 @@ interface SearchFilterSortProps {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 const SearchFilterSort: React.FC<SearchFilterSortProps> = ({ setQuery }) => {
-  const [filter, setFilter] = useState("")
-  const [sort, setSort] = useState("")
-  const [search, setSearch] = useState("")
+  const [filter, setFilter] = useState("");
+  const [sort, setSort] = useState("");
+  const [search, setSearch] = useState("");
   const { register, handleSubmit } = useForm();
-  const { data } = useGetCategoryQuery(undefined)
+  const { data } = useGetCategoryQuery(undefined);
+
+  const handelResetFilter = () => {
+    setSearch("");
+    setQuery("");
+  };
   useEffect(() => {
     if (filter) {
       setQuery(`filter=${filter}`);
@@ -30,24 +35,26 @@ const SearchFilterSort: React.FC<SearchFilterSortProps> = ({ setQuery }) => {
   }, [filter, sort, search, setQuery]);
 
   const onSubmit = (data) => {
-    setSearch(data.searchValue)
-  }
+    setSearch(data.searchValue);
+  };
+
+
   const category: TCategory[] = data?.data || []
   return (
-    <div className="mb-8 flex lg:justify-between flex-col md:flex-row items-center gap-4">
-      <form action="search" onChange={handleSubmit(onSubmit)} className="flex items-center w-full md:w-1/3">
+    <div className="mb-8 flex lg:justify-between flex-col md:flex-row items-center gap-4 ">
+      <form action="search" onChange={handleSubmit(onSubmit)} className=" flex-1 flex items-center w-full md:w-1/3">
         <input
           {...register("searchValue")}
           type="text"
           placeholder="Search..."
-          className="w-full px-4 py-2 border rounded-l-md focus:outline-none"
+          className="w-3/4 px-4 py-2 border rounded-l-md focus:outline-none"
         />
-        <button className=" text-lg bg-orange-500 p-3 text-white rounded-r-md">
+        <button className=" text-lg bg-orange-500 hover:bg-orange-700 p-3 text-white rounded-r-md">
           <AiOutlineSearch />
         </button>
       </form>
-      <div className="md:flex space-y-3 md:space-y-0 items-center gap-4 w-full md:w-1/3 z-50">
-        <div className="flex items-center gap-2">
+      <div className=" flex-1 justify-end md:flex space-y-3 md:space-y-0 items-center gap-4 w-full md:w-1/3 z-50">
+        <div className=" flex items-center gap-2">
           <BiFilterAlt className="text-lg text-gray-600 " />
           <DropdownMenu >
             <DropdownMenuTrigger asChild>
@@ -78,6 +85,9 @@ const SearchFilterSort: React.FC<SearchFilterSortProps> = ({ setQuery }) => {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
+        </div>
+        <div>
+          <Button onClick={handelResetFilter} className="bg-orange-500 hover:bg-orange-700">Reset All </Button>
         </div>
       </div>
     </div>

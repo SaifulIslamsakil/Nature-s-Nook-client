@@ -14,6 +14,7 @@ export type TProduct = {
     inStock: number;
     productType: "special" | "Special" | "offerd";
     isDeleted: boolean;
+    quantity?:number
 }
 export type Inputs = {
     name: string;

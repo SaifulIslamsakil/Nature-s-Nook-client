@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
       <div className=" max-w-7xl w-full mx-auto ">
         <RouterProvider router={Router} />
-        <ToastContainer  />
+        <ToastContainer />
       </div>
     </Provider>
   </React.StrictMode>,

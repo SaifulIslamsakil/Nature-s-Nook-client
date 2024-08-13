@@ -6,7 +6,7 @@ import Home from "@/pages/home/Home";
 import ProductManagement from "@/pages/productManagement/ProductManagement";
 import Products from "@/pages/products/Products";
 import ProductDetiles from "@/pages/productsDetiles/ProductDetiles";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom"
 
 const Router = createBrowserRouter([
     {

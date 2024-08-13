@@ -5,10 +5,12 @@ import addToCartReducer from "./feature/addToCart/addToCartSilice";
 const store = configureStore({
     reducer: {
         [baseApi.reducerPath]: baseApi.reducer,
-        addToCart: addToCartReducer
+        addToCart: addToCartReducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(baseApi.middleware),
+        getDefaultMiddleware({
+            
+        }).concat(baseApi.middleware),
 })
 
 
