@@ -7,12 +7,15 @@ import {TProduct } from "@/interface/interface";
 import ProductForm from "@/components/ui/ProductForm";
 import { useState } from "react";
 import Swal from "sweetalert2"
+import Loder from "@/components/ui/Loder";
 
 const ProductManagement = () => {
     const [formTigger, setFormTigger] = useState<boolean>(false)
     const [formAction, SetformAction] = useState<string>('')
     const [deleteProduct] = useProductDeleteMutation()
-    const { data, isLoading } = useGetProductQuery("")
+    const { data, isLoading, error } = useGetProductQuery("")
+    if (isLoading) return <p className=" flex justify-center items-center h-52"><Loder /></p>;
+    if (error) return <p className="flex justify-center items-center h-52 text-orange-500">Something Went Wrong Please Try Again.....</p>
     const product: TProduct[] = data?.data
     const handelProductDelete = async (id: string) => {
         Swal.fire({
@@ -60,7 +63,7 @@ const ProductManagement = () => {
                         </thead>
                         <tbody>
                             {
-                                isLoading ? "lodding...." : product.map(item => <tr key={item._id} className=" text-center hover:shadow-lg hover:bg-slate-50">
+                                product.map(item => <tr key={item._id} className=" text-center hover:shadow-lg hover:bg-slate-50">
                                     <td className="py-2 px-4 border-b font-medium">
                                         <img className=" w-24 h-24 mx-auto object-cover" src={item?.image[0]} alt="" />
                                     </td>

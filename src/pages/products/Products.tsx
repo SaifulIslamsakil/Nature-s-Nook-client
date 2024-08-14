@@ -1,3 +1,4 @@
+import Loder from "@/components/ui/Loder";
 import ProductCard from "@/components/ui/ProductCard";
 import ProductsHero from "@/components/ui/ProductsHero";
 import ProductsPaginations from "@/components/ui/ProductsPaginations";
@@ -6,8 +7,10 @@ import { TProduct } from "@/interface/interface";
 import { useGetProductQuery } from "@/redux/feature/product/productApi";
 import { useState } from "react";
 const Products = () => {
-    const [query, setQuery] = useState("")    
-    const { data, isLoading } = useGetProductQuery(query)
+    const [query, setQuery] = useState("")
+    const { data, isLoading, error } = useGetProductQuery(query)
+    if (isLoading) return <p className=" flex justify-center items-center h-52"><Loder /></p>;
+    if (error) return <p className="flex justify-center items-center h-52 text-orange-500">Something Went Wrong Please Try Again....</p>
     const product: TProduct[] = data?.data || []
     return (
         <div className=" mt-6 border">
@@ -21,7 +24,7 @@ const Products = () => {
                         <SearchFilterSort setQuery={setQuery} />
                         <div className="grid  md:grid-cols-3 lg:grid-cols-5 gap-4">
                             {
-                              !isLoading?  product?.map(item => <ProductCard key={item._id} product={item} />) :"Lodding...."
+                                product?.map(item => <ProductCard key={item._id} product={item} />)
                             }
                         </div>
                     </div>

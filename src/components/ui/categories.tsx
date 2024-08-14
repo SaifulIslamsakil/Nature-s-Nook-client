@@ -2,13 +2,14 @@ import { TCategory } from "@/interface/interface";
 import { useGetCategoryQuery } from "@/redux/feature/category/categoryApi";
 import React from 'react';
 import { Link } from "react-router-dom";
+import Loder from "./Loder";
 
 
 
 const Categories: React.FC = () => {
     const { data, error, isLoading } = useGetCategoryQuery(undefined);
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error loading categories.</p>;
+    if (isLoading) return <p className=" flex justify-center items-center h-40"><Loder /></p>;
+    if (error) return <p className="flex justify-center items-center h-40 text-orange-500">Something Went Wrong Please Try Again.....</p>
     const categories: TCategory[] = data?.data || [];
     return (
         <div className="p-5 pt-10 space-y-10">

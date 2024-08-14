@@ -95,8 +95,9 @@ const Cart = () => {
                             <Link to="/checkout"><Button disabled={state.find(data=> data.quantity === 0 )} className="w-full bg-orange-500 text-white rounded hover:bg-orange-600 ">Proceed to Checkout</Button></Link>
                         </div>
                     </div>
-                </div> : <div>
-                    <p>card in empty</p>
+                </div> : <div className="h-52 flex justify-center items-center flex-col space-y-2 text-orange-500">
+                    <p className=" text-xl font-semibold"> Your Card Is Empty</p>
+                    <Link to="/products" className=" hover:underline">Add product</Link>
                 </div>
             }
         </div>
