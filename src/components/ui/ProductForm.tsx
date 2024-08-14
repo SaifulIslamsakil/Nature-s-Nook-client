@@ -78,7 +78,7 @@ const ProductForm = ({ setFormTigger, formAction }: Tprops) => {
                         <div className="grid grid-cols-12 w-full items-center gap-4 space-y-2">
                             <div className="flex flex-col space-y-1.5 col-span-6">
                                 <Label>Name</Label>
-                                <Input id="name" {...register("name")} placeholder="Name of your product" />
+                                <Input id="name" {...register("name", {required:true})} placeholder="Name of your product" />
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-6">
                                 <Label>Category</Label>
@@ -97,11 +97,11 @@ const ProductForm = ({ setFormTigger, formAction }: Tprops) => {
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-4">
                                 <Label>Price</Label>
-                                <Input {...register("price")} id="price" type="number" placeholder="Price" />
+                                <Input {...register("price", {required:true})} id="price" type="number" placeholder="Price" />
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-4">
                                 <Label>InStock</Label>
-                                <Input {...register("inStock")} id="stock" type="number" placeholder="Product Stock" />
+                                <Input {...register("inStock",{required:true})} id="stock" type="number" placeholder="Product Stock" />
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-4">
                                 <Label>Type</Label>
@@ -118,19 +118,19 @@ const ProductForm = ({ setFormTigger, formAction }: Tprops) => {
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-4">
                                 <Label>1st Img</Label>
-                                <Input {...register("img1")} id="img1" type="file" placeholder="Name of your project" />
+                                <Input {...register("img1",{required:true})} id="img1" type="file" placeholder="Name of your project" />
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-4">
                                 <Label>2nd Img</Label>
-                                <Input {...register("img2")} id="img2" type="file" placeholder="Name of your project" />
+                                <Input {...register("img2",{required:true})} id="img2" type="file" placeholder="Name of your project" />
                             </div>
                             <div className="flex flex-col space-y-1.5 col-span-4">
                                 <Label>3rd Img</Label>
-                                <Input {...register("img3")} id="img3" type="file" placeholder="Name of your project" />
+                                <Input {...register("img3",{required:true})} id="img3" type="file" placeholder="Name of your project" />
                             </div>
                             <div className="grid col-span-12 gap-1.5">
                                 <Label>Description</Label>
-                                <Textarea {...register("description")} id="description" placeholder="Type your message here." />
+                                <Textarea {...register("description",{required:true})} id="description" placeholder="Type your message here." />
                             </div>
                         </div>
                         <div className="col-span-12 flex justify-between pt-4">

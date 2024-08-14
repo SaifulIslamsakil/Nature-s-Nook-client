@@ -19,17 +19,22 @@ const addToCartSlice = createSlice({
         },
         increment: (state, action) => {
             const findProduct:TProduct | undefined   = state.find(data => data._id === action.payload)
-            const count = findProduct!.quantity! += 1
-            console.log(count)
+            findProduct!.quantity! += 1
         },
         decrement: (state, action) => {
             const findProduct:TProduct | undefined   = state.find(data => data._id === action.payload)
-            const count = findProduct!.quantity! -= 1
-            console.log(count)
+             findProduct!.quantity! -= 1
+
+        },
+        deleteProductInCart : (state, action)=>{
+            const indexToDelete = state.findIndex(data => data._id === action?.payload);
+            if(indexToDelete !== -1){
+                state.splice(indexToDelete, 1);
+            }
         }
 
     }
 });
 
-export const { addToCart, increment, decrement } = addToCartSlice.actions;
+export const { addToCart, increment, decrement, deleteProductInCart } = addToCartSlice.actions;
 export default addToCartSlice.reducer;

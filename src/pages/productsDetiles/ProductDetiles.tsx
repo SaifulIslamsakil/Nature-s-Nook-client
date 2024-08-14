@@ -6,20 +6,22 @@ import { addToCart } from '@/redux/feature/addToCart/addToCartSilice';
 import { useGetProductQuery, useGetSingelProductQuery } from '@/redux/feature/product/productApi';
 import { useAppDispatch } from '@/redux/hooks';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ProductDetiles = () => {
+    const [count, setCount] = useState<number>(1)
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { id } = useParams();
     const { data: productData, error, isLoading } = useGetSingelProductQuery(id);
-    // const { data: reviewsData } = useGetProductReviewsQuery(id);
     const [mainImage, setMainImage] = useState<string>('');
     const product: TProduct = productData?.data || [];
     const filter = `filter=${product.category}`;
     const { data } = useGetProductQuery(filter);
     const relatedProduct: TProduct[] = data?.data || [];
     const notMacthProduct = relatedProduct.filter(ele => ele.name !== product.name);
-
+    const { name, price, image, description } = product;
     if (!mainImage && product.image && product.image.length > 0) {
         setMainImage(product.image[0]);
     }
@@ -32,7 +34,24 @@ const ProductDetiles = () => {
         return <div>Error loading product data.</div>;
     }
 
-    const { name, price, image, description } = product;
+    const addProductInCart = () => {
+        if (product.inStock < count) {
+            return toast.error("this product out of stock")
+        } else {
+            try {
+                const productData = { ...product, quantity: count }
+                dispatch(addToCart(productData))
+                navigate("/products")
+                toast.success("your product added to cart")
+
+            } catch (error) {
+                if(error){
+                    return toast.error("this product allrady add your card")
+                }
+            }
+           
+        }
+    }
 
     return (
         <div className="space-y-5 bg-slate-50">
@@ -68,14 +87,14 @@ const ProductDetiles = () => {
                         <div className="mt-4">
                             <label className="text-gray-700">Quantity:</label>
                             <div className="flex items-center mt-2">
-                                <button  className="p-2 border border-gray-300 rounded-l-md">-</button>
-                                <input type="text" readOnly value={product?.quantity} className="w-12 text-center border-t border-b border-gray-300" />
-                                <button  className="p-2 border border-gray-300 rounded-r-md">+</button>
+                                <button onClick={() => setCount(count - 1)} disabled={count <= 0} className="p-2 border border-gray-300 rounded-l-md">-</button>
+                                <input type="text" readOnly value={count} className="w-12 text-center border-t border-b border-gray-300" />
+                                <button onClick={() => setCount(count + 1)} className="p-2 border border-gray-300 rounded-r-md">+</button>
                             </div>
                         </div>
                         <div className="mt-6">
-                            <Button onClick={()=> dispatch(addToCart(product))} variant="outline" className="w-full py-4 rounded-md hover:bg-black hover:text-white">ADD TO CART</Button>
-                            <button className="w-full text-white bg-orange-500 py-3 rounded-md shadow-md hover:bg-orange-600 mt-4">Buy with PayPal</button>
+                            <Button disabled={product?.inStock <= 0} onClick={addProductInCart} variant="outline" className="w-full py-4 rounded-md hover:bg-black hover:text-white">ADD TO CART</Button>
+                            <Button disabled={product?.inStock <= 0 || product?.inStock < count} className="w-full text-white bg-orange-500 py-3 rounded-md shadow-md hover:bg-orange-600 mt-4">Buy with Stripe</Button>
                         </div>
                         <div className="mt-4 text-blue-500 cursor-pointer">
                             <p>Pickup available at <span className="underline">Adventure Shop</span></p>

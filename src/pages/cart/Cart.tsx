@@ -6,15 +6,45 @@ import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { decrement, increment } from "@/redux/feature/addToCart/addToCartSilice";
+import { decrement, deleteProductInCart, increment } from "@/redux/feature/addToCart/addToCartSilice";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 
 const Cart = () => {
     const dispatch = useDispatch()
     const state = useAppSelector((state: RootState) => state.addToCart)
     const calculateTotal = () => {
-        return state.reduce((total, item) => total + item.price * item.inStock, 0);
+        return state.reduce((total, item) => total + item.price * item.quantity!, 0);
     };
+    const checkStock = (id : string)=> {
+        const findProduct = state.find(data=> data._id === id)
+        if(findProduct!.inStock! <= findProduct!.quantity!){
+            return toast.error("this product out of stock")
+        }else{
+            dispatch(increment(id))
+        }
+    }
+    const deleteProductInTheCart = (id:string) =>{
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteProductInCart(id))
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "deleted ",
+                    icon: "success"
+                });
+            }
+        });
+    }
     return (
         <div>
             {
@@ -40,12 +70,12 @@ const Cart = () => {
                                                 <img src={item?.image[0]} alt={item.name} className="w-16 h-16 object-cover" />
                                             </td>
                                             <td className="py-2 px-4 border-b font-semibold">{item?.name}</td>
-                                            <td className="py-2 px-4 border-b">${item.price.toFixed(2)}</td>
-                                            <td className="py-10 px-4 border-b flex items-center gap-4 "><span onClick={()=> dispatch(decrement(item?._id))} className=" font-semibold bg-orange-500 hover:bg-orange-700 text-white p-1 rounded-lg"><IoIosArrowBack /></span>{item?.quantity}
-                                                <span onClick={()=> dispatch(increment(item?._id))} className=" font-semibold bg-orange-500 hover:bg-orange-700 text-white p-1 rounded-lg"><IoIosArrowForward /></span></td>
-                                            <td className="py-2 px-4 border-b">${(item.price * item.inStock).toFixed(2)}</td>
+                                            <td className="py-2 px-4 border-b">${item.price}</td>
+                                            <td className="py-10 px-4 border-b flex items-center gap-4 "><button disabled={item!.quantity! <= 0} onClick={()=> dispatch(decrement(item?._id))} className=" font-semibold bg-orange-500 hover:bg-orange-700 text-white p-1 rounded-lg"><IoIosArrowBack /></button>{item?.quantity}
+                                                <button onClick={()=>checkStock(item?._id)} className=" font-semibold bg-orange-500 hover:bg-orange-700 text-white p-1 rounded-lg"><IoIosArrowForward /></button></td>
+                                            <td className="py-2 px-4 border-b">${(item.price * item.quantity!).toFixed(2)}</td>
                                             <td className="py-2 px-4 border-b space-x-3">
-                                                <Button className=" bg-orange-500 hover:bg-orange-700 text-xl"><RiDeleteBin6Line /></Button>
+                                                <Button onClick={()=> deleteProductInTheCart(item?._id)} className=" bg-orange-500 hover:bg-orange-700 text-xl"><RiDeleteBin6Line /></Button>
                                             </td>
                                         </tr>
                                     ))}
@@ -56,13 +86,13 @@ const Cart = () => {
                             <h2 className="text-xl font-bold mb-4">Order Summary</h2>
                             <div className="flex justify-between mb-2">
                                 <span>Total Items:</span>
-                                <span>{state?.reduce((total, item) => total + item.inStock, 0)}</span>
+                                <span>{state?.reduce((total, item) => total + item.quantity!, 0)}</span>
                             </div>
                             <div className="flex justify-between mb-2">
                                 <span>Total Price:</span>
                                 <span>${calculateTotal().toFixed(2)}</span>
                             </div>
-                            <Link to="/checkout"><Button className="w-full bg-orange-500 text-white rounded hover:bg-orange-600 ">Proceed to Checkout</Button></Link>
+                            <Link to="/checkout"><Button disabled={state.find(data=> data.quantity === 0 )} className="w-full bg-orange-500 text-white rounded hover:bg-orange-600 ">Proceed to Checkout</Button></Link>
                         </div>
                     </div>
                 </div> : <div>

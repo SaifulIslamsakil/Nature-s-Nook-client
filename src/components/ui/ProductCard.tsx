@@ -10,6 +10,9 @@ const ProductCard = ({ product }: { product: TProduct }) => {
     const dispatch = useAppDispatch()
     const handelAddProductInCart = () => {
        try {
+        if(product?.inStock === 0){
+            return toast.error("this product out of stock")
+        }
         const productData = {...product, quantity : 1}
         dispatch(addToCart(productData))
         toast.success("your product added to cart")
