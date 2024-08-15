@@ -9,8 +9,7 @@ import { useDispatch } from "react-redux";
 import { decrement, deleteProductInCart, increment } from "@/redux/feature/addToCart/addToCartSilice";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-
-
+import { useEffect } from "react";
 const Cart = () => {
     const dispatch = useDispatch()
     const state = useAppSelector((state: RootState) => state.addToCart)
@@ -45,6 +44,21 @@ const Cart = () => {
             }
         });
     }
+
+
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            if (state.length > 0) {
+                event.preventDefault();
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [state]);
     return (
         <div>
             {
