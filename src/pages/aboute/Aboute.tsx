@@ -15,7 +15,8 @@ const Aboute = () => {
     ];
     return (
         <div>
-            <div >
+            {/* hero section */}
+            <div>
                 <Carousel
                     autoPlay
                     infiniteLoop
@@ -24,17 +25,22 @@ const Aboute = () => {
                     className="rounded-md shadow-md"
                 >
                     <div>
-                        <img className="h-[440px] object-cover" src="https://i.ibb.co/552TngY/s-l400.jpg" alt="Carousel Image 1" />
+                        <img className="h-[440px] object-cover" src="https://i.ibb.co/bRQW0Gn/good-nature-homepage-hero-2-1280x640.jpg" alt="Carousel Image 1" />
                     </div>
+
                     <div>
                         <img className="h-[440px] object-cover" src="https://i.ibb.co/FnKdCX5/outbound-quickcamp-instant-cabin-tent-8-person-a69c4165-1367-4591-8171-c69180311ad5-jpgrendition.jpg" alt="Carousel Image 2" />
                     </div>
                     <div>
-                        <img className="h-[440px] object-cover" src="https://i.ibb.co/Fb5WW4x/download-5.jpg" alt="Carousel Image 2" />
+                        <img className="h-[440px] object-cover" src="https://i.ibb.co/NC9bwCr/home-2-img1.jpg" alt="Carousel Image 1" />
+                    </div>
+                    <div>
+                        <img className="h-[440px] object-cover" src="https://i.ibb.co/GcjM44B/l-intro-1700505877.jpg" alt="Carousel Image 2" />
                     </div>
 
                 </Carousel>
             </div>
+            {/* map section */}
             <div>
                 <div className="h-80">
                     <iframe
@@ -46,7 +52,8 @@ const Aboute = () => {
                     ></iframe>
                 </div>
             </div>
-            <div className=" mx-auto   text-slate-700 space-y-10 border">
+            {/* Aboute us  */}
+            <div className=" mx-auto   text-slate-700 space-y-10 ">
                 <div className="mt-10">
                     <h2 className="text-3xl font-bold mb-4 text-center pb-5 text-orange-500 cursor-pointer">Aboute Us</h2>
                     <div className="flex-col-reverse lg:flex-row flex items-center justify-between rounded mb-4 gap-5  p-5 ">
@@ -93,13 +100,15 @@ const Aboute = () => {
                             </div>
                         </div>
                         <div className="flex-1">
-                            <img className=" w-3/4 lg:w-4/5 mx-auto" src="https://i.ibb.co/S0j9stn/the-national-park-service-park-ranger-wearing-a-mask-because-of-the-covid-19-pandemic-cabrillo-t20-r.jpg" alt="" />
+                            <img className=" md:w-3/4 lg:w-4/5 mx-auto" src="https://i.ibb.co/S0j9stn/the-national-park-service-park-ranger-wearing-a-mask-because-of-the-covid-19-pandemic-cabrillo-t20-r.jpg" alt="" />
                         </div>
                     </div>
                 </div>
+            </div>
 
+            {/* Meet Our Team section */}
 
-                <div className="p-4 rounded space-y-10">
+            <div className="p-4 rounded space-y-10">
                     <h2 className="text-3xl font-bold  text-center text-orange-500">Meet Our Team</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {teamMembers.map(member => (
@@ -114,12 +123,59 @@ const Aboute = () => {
                         ))}
                     </div>
                 </div>
-                {/* Map Section */}
 
                 {/* Mission Statement Section */}
-                <div className="p-4">
-                    <h2 className="text-3xl font-bold mb-4 text-center text-orange-500">Our Mission</h2>
-                    <p className="text-gray-700">Our mission is to provide the best services and products to our customers while maintaining a commitment to quality and innovation. We strive to make a positive impact on the community and the world.</p>
+
+                <div className=" flex flex-col items-center justify-center p-4">
+                    <div className="rounded-lg ">
+                        <h1 className="text-3xl font-bold text-center text-orange-500 my-10">Our Mission</h1>
+                        <img
+                            src="https://i.ibb.co/bRQW0Gn/good-nature-homepage-hero-2-1280x640.jpg"
+                            alt="Nature Adventure"
+                            className="w-full h-80  object-cover rounded-lg"
+                        />
+                        <p className="mt-6 text-lg text-gray-700">
+                            At Campers Shop, our mission is to inspire and enable adventurers to explore the great outdoors
+                            with confidence. We are committed to providing top-quality gear and resources that empower our
+                            customers to embark on unforgettable journeys, whether it’s a weekend camping trip or a month-long
+                            expedition.
+                        </p>
+
+                        {/* Additional Image */}
+                        <div className="mt-6">
+                            <img
+                                src="https://i.ibb.co/GcjM44B/l-intro-1700505877.jpg"
+                                alt="Camping Gear"
+                                className="w-full h-80 object-cover rounded-lg"
+                            />
+                        </div>
+
+                        <p className="mt-6 text-lg text-gray-700">
+                            We believe that nature has the power to refresh the soul, challenge the mind, and strengthen the body.
+                            Our goal is to make the outdoors accessible to everyone by offering products that are both affordable and
+                            reliable, without compromising on quality.
+                        </p>
+
+                        <p className="mt-4 text-lg text-gray-700">
+                            Sustainability is at the heart of everything we do. We are dedicated to preserving the environment we
+                            love to explore, which is why we prioritize eco-friendly materials and practices throughout our business.
+                            Join us in our mission to protect the wild places that inspire us all.
+                        </p>
+
+                        {/* Final Image */}
+                        <div className="mt-6">
+                            <img
+                                src="https://i.ibb.co/rvPdcLM/eco-blog-image.jpg"
+                                alt="Eco-Friendly Practices"
+                                className="w-full h-80 object-cover rounded-lg"
+                            />
+                        </div>
+
+                        <p className="mt-6 text-lg text-gray-700">
+                            Together, let's gear up, set out, and make memories that last a lifetime. Your adventure starts here at
+                            Campers Shop.
+                        </p>
+                    </div>
                 </div>
 
                 {/* Team Members Section */}
@@ -135,7 +191,7 @@ const Aboute = () => {
                     <footer className="bg-[#140a04] p-8 text-center sm:text-left text-white">
                         <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 text-center pt-10">
                             {/* Stays Section */}
-                            <div className=" border-r border-white ">
+                            <div className=" md:border-r border-white ">
                                 <h3 className="text-2xl mb-4 font-bold">Stays</h3>
                                 <ul className="space-y-5">
                                     <li className="mb-2"><a href="#" className="hover:underline">Vista Cabin</a></li>
@@ -162,7 +218,7 @@ const Aboute = () => {
                             </div>
 
                             {/* Experiences Section */}
-                            <div className=" border-l border-white">
+                            <div className=" md:border-l border-white">
                                 <h3 className="text-2xl mb-4 font-bold ">Experiences</h3>
                                 <ul className=" space-y-5">
                                     <li className="mb-2"><a href="#" className="hover:underline">Hiking</a></li>
@@ -175,8 +231,6 @@ const Aboute = () => {
                         <p className=" text-gray-400 mt-8 text-center">©Copyright Developed by YourCompanyName</p>
                     </footer>
                 </div>
-
-            </div>
 
         </div>
     );

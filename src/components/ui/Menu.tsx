@@ -20,16 +20,16 @@ const Menu = () => {
             path: "/product-management"
         },
         {
-            name: "Blog",
-            path: "/f"
+            name: "My cart",
+            path: "/cart"
         },
         {
             name: "Camping",
-            path: "/g"
+            path: "/Camping"
         },
         {
             name: "Register",
-            path: "/ll"
+            path: "/Register"
         },
     ]
 
