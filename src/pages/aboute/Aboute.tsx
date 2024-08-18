@@ -9,9 +9,9 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const Aboute = () => {
     const teamMembers = [
         // Sample team members
-        { id: 1, name: 'Alice Johnson', role: 'CEO', image: 'https://via.placeholder.com/150', bio: 'Alice is the CEO and founder of the company.' },
-        { id: 2, name: 'Bob Smith', role: 'CTO', image: 'https://via.placeholder.com/150', bio: 'Bob is the CTO and leads the technology team.' },
-        { id: 3, name: 'Carol White', role: 'CFO', image: 'https://via.placeholder.com/150', bio: 'Carol manages the financial operations of the company.' },
+        { id: 1, name: 'Alice Johnson', role: 'CEO', image: 'https://i.ibb.co/vVdBRpM/shutterstock-105623048-0.jpg', bio: 'Alice is the CEO and founder of the company.' },
+        { id: 2, name: 'Bob Smith', role: 'CTO', image: 'https://i.ibb.co/Lt0Cc08/images-12.jpg', bio: 'Bob is the CTO and leads the technology team.' },
+        { id: 3, name: 'Carol White', role: 'CFO', image: 'https://i.ibb.co/RjR4Vn3/images-13.jpg', bio: 'Carol manages the financial operations of the company.' },
     ];
     return (
         <div>
@@ -47,15 +47,13 @@ const Aboute = () => {
                 </div>
             </div>
             <div className=" mx-auto   text-slate-700 space-y-10 border">
-                {/* Contact Information Section */}
-
                 <div className="mt-10">
-                <h2 className="text-3xl font-bold mb-4 text-center pb-5 text-orange-500 cursor-pointer">Aboute Us</h2>
+                    <h2 className="text-3xl font-bold mb-4 text-center pb-5 text-orange-500 cursor-pointer">Aboute Us</h2>
                     <div className="flex-col-reverse lg:flex-row flex items-center justify-between rounded mb-4 gap-5  p-5 ">
                         <div className=" flex-1 space-y-5 cursor-pointer">
                             <p className=" text-lg ">Let Us Make Your Trip Memorable</p>
                             <h2 className=" text-2xl md:text-5xl font-bold text-orange-500">California's Premier Camping Destination</h2>
-                            <p className=" text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi venenatis facilisis lacus at mollis. Donec vel tellus risus. Praesent luctus leo nunc, nec pharetra tellus suscipit ut. Praesent sed erat mattis, dictum libero nec, dignissim arcu.</p>
+                            <p className=" text-justify">At The Mountain, it is our mission to serve as the ultimate campground hosts, ensuring your satisfaction and creating a getaway that uniquely memorable. We achieve this mission by providing meticulously maintained facilities, accommodating service, and fun.</p>
                             <div className="lg:pt-5 space-y-5">
                                 <div className=" space-y-5 md:space-y-0 md:flex items-center gap-5">
                                     <div className=" flex-1 flex gap-2 border-b pb-5">
@@ -101,15 +99,17 @@ const Aboute = () => {
                 </div>
 
 
-                <div className="p-4 rounded space-y-5">
-                    <h2 className="text-2xl font-bold mb-4 text-center">Meet Our Team</h2>
+                <div className="p-4 rounded space-y-10">
+                    <h2 className="text-3xl font-bold  text-center text-orange-500">Meet Our Team</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {teamMembers.map(member => (
-                            <div key={member.id} className="bg-gray-100 p-4 rounded shadow">
-                                <img src={member.image} alt={member.name} className="w-full h-40 object-cover rounded mb-4" />
-                                <h3 className="text-xl font-bold">{member.name}</h3>
-                                <p className="text-gray-700 mb-2">{member.role}</p>
-                                <p className="text-gray-600">{member.bio}</p>
+                            <div key={member.id} className=" shadow-lg rounded ">
+                                <img src={member.image} alt={member.name} className="w-full h-60 object-cover rounded " />
+                                <div className=" p-3">
+                                    <h3 className="text-xl font-bold">{member.name}</h3>
+                                    <p className="text-gray-700 ">{member.role}</p>
+                                    <p className="text-gray-600">{member.bio}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -118,7 +118,7 @@ const Aboute = () => {
 
                 {/* Mission Statement Section */}
                 <div className="p-4">
-                    <h2 className="text-2xl font-bold mb-4 text-center">Our Mission</h2>
+                    <h2 className="text-3xl font-bold mb-4 text-center text-orange-500">Our Mission</h2>
                     <p className="text-gray-700">Our mission is to provide the best services and products to our customers while maintaining a commitment to quality and innovation. We strive to make a positive impact on the community and the world.</p>
                 </div>
 

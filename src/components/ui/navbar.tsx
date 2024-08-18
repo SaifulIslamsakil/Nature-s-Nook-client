@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { Input } from "./input";
-import { Button } from "./button";
 import { RiMenuUnfoldLine } from "react-icons/ri";
 import { IoIosArrowDown, IoIosCall } from "react-icons/io";
 import { BiSolidMessageRoundedDots } from "react-icons/bi";
