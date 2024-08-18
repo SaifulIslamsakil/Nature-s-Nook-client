@@ -9,7 +9,7 @@ const Menu = () => {
         },
         {
             name: "About Us",
-            path: "/a"
+            path: "/aboute"
         },
         {
             name: "Products",

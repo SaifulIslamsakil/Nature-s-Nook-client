@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <div className="bg-black space-y-1 p-2">
+      <div className="bg-[#1d0f06] space-y-1 p-2">
         <p className="hidden lg:block text-orange-300">
           Free Standard Shipping for Orders Over $50. <span className="underline">Learn More</span>
         </p>
@@ -28,14 +28,7 @@ const Navbar = () => {
               Nature's <span className="text-orange-500">Nooks</span>
             </h1>
           </div>
-          <div className="hidden lg:block flex-1">
-            <div className="flex w-full max-w-sm items-center space-x-2 text-black">
-              <Input className="w-full" type="search" placeholder="Search now..." />
-              <Button className="bg-orange-500" type="submit">
-                Search
-              </Button>
-            </div>
-          </div>
+          
           <div className="hidden lg:block">
             <ul className="flex gap-2">
               <li className="flex items-center gap-1 hover:text-orange-500">

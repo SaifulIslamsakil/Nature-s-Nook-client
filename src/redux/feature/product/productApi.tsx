@@ -5,40 +5,57 @@ const productApi = baseApi.injectEndpoints({
             query: (payload) => ({
                 url: `/product/create-product`,
                 method: "POST",
-                body: payload
-            })
+                body: payload,
+
+            }),
+            invalidatesTags: ['Product']
+
 
         }),
         getProduct: builder.query({
             query: (payload) => ({
                 url: `/product?${payload}`,
                 method: "GET",
-                providesTags: ['product'],
 
-            })
+            }),
+            providesTags: ['Product'],
+
         }),
         getSingelProduct: builder.query({
             query: (id) => ({
                 url: `/product/${id}`,
                 method: "GET",
-            })
+
+            }),
+            providesTags: ['Product']
         }),
         productDelete: builder.mutation({
             query: (id) => ({
                 url: `/product/${id}`,
-                method: "DELETE",
-            })
+                method: "DELETE"
+            }),
+            invalidatesTags: ['Product'],
         }),
         productUpdate: builder.mutation({
             query: ({ id, ...payload }) => ({
                 url: `/product/product-update/${id}`,
                 method: "PUT",
-                body: payload
-            })
+                body: payload,
+            }),
+            invalidatesTags: ['Product'],
+        }),
+        uploadImages: builder.mutation({
+            query: (payload) => ({
+                url: "https://api.imgbb.com/1/upload?4f0141f09181eae5680c48d40b51f217",
+                method:"POST",
+                body:payload
+            }),
+            invalidatesTags: [],
         }),
     }),
+
 })
 
 
 
-export const { useGetProductQuery, useGetSingelProductQuery, useProductDeleteMutation, useCreateProductMutation, useProductUpdateMutation } = productApi
+export const { useGetProductQuery, useGetSingelProductQuery, useProductDeleteMutation, useCreateProductMutation, useProductUpdateMutation, useUploadImagesMutation } = productApi

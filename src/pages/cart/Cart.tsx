@@ -18,7 +18,7 @@ const Cart = () => {
     };
     const checkStock = (id : string)=> {
         const findProduct = state.find(data=> data._id === id)
-        if(findProduct!.inStock! <= findProduct!.quantity!){
+        if(findProduct!.inStock! < findProduct!.quantity!){
             return toast.error("this product out of stock")
         }else{
             dispatch(increment(id))
@@ -85,7 +85,7 @@ const Cart = () => {
                                             </td>
                                             <td className="py-2 px-4 border-b font-semibold">{item?.name}</td>
                                             <td className="py-2 px-4 border-b">${item.price}</td>
-                                            <td className="py-10 px-4 border-b flex items-center gap-4 "><button disabled={item!.quantity! <= 0} onClick={()=> dispatch(decrement(item?._id))} className=" font-semibold bg-orange-500 hover:bg-orange-700 text-white p-1 rounded-lg"><IoIosArrowBack /></button>{item?.quantity}
+                                            <td className="py-10 px-4 border-b flex items-center gap-4 "><button disabled={item!.quantity! <= 1} onClick={()=> dispatch(decrement(item?._id))} className=" font-semibold bg-orange-500 hover:bg-orange-700 text-white p-1 rounded-lg"><IoIosArrowBack /></button>{item?.quantity}
                                                 <button onClick={()=>checkStock(item?._id)} className=" font-semibold bg-orange-500 hover:bg-orange-700 text-white p-1 rounded-lg"><IoIosArrowForward /></button></td>
                                             <td className="py-2 px-4 border-b">${(item.price * item.quantity!).toFixed(2)}</td>
                                             <td className="py-2 px-4 border-b space-x-3">
@@ -106,7 +106,7 @@ const Cart = () => {
                                 <span>Total Price:</span>
                                 <span>${calculateTotal().toFixed(2)}</span>
                             </div>
-                            <Link to="/checkout"><Button disabled={state.find(data=> data.quantity === 0 )} className="w-full bg-orange-500 text-white rounded hover:bg-orange-600 ">Proceed to Checkout</Button></Link>
+                            <Link to="/checkout"><Button disabled={state.find(data=> data.quantity === 0 || data.inStock < data!.quantity!  )} className="w-full bg-orange-500 text-white rounded hover:bg-orange-600 ">Proceed to Checkout</Button></Link>
                         </div>
                     </div>
                 </div> : <div className="h-52 flex justify-center items-center flex-col space-y-2 text-orange-500">
