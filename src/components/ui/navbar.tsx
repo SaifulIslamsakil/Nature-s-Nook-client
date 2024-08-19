@@ -36,8 +36,8 @@ const Navbar = () => {
                 <span className="text-lg"><IoIosCall /></span> 1-800-123-4567
               </li>
               <Link to="cart">
-                <li className="flex items-center gap-1 hover:text-orange-500 text-orange-500 text-2xl">
-                  <span className="text-lg"><FaCartShopping /></span> ({state.length})
+                <li className="flex items-center gap-1 hover:text-orange-500 text-orange-500 text-xl font-semibold">
+                  <span><FaCartShopping /></span> ({state.length})
                 </li>
               </Link>
             </ul>
