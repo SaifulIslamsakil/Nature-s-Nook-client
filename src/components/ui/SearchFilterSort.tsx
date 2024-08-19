@@ -6,7 +6,7 @@ import { Button } from "./button";
 import { useEffect, useState } from "react";
 import { useGetCategoryQuery } from "@/redux/feature/category/categoryApi";
 import { TCategory } from "@/interface/interface";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 interface SearchFilterSortProps {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -34,15 +34,15 @@ const SearchFilterSort: React.FC<SearchFilterSortProps> = ({ setQuery }) => {
     }
   }, [filter, sort, search, setQuery]);
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setSearch(data.searchValue);
   };
 
 
   const category: TCategory[] = data?.data || []
   return (
-    <div className="mb-8 flex lg:justify-between flex-col md:flex-row items-center gap-4 ">
-      <form action="search" onChange={handleSubmit(onSubmit)} className=" flex-1 flex items-center w-full md:w-1/3">
+    <div className="mb-8 flex lg:justify-between flex-col lg:flex-row items-center gap-4 ">
+      <form action="search" onChange={handleSubmit(onSubmit)} className=" flex-1 flex items-center w-full lg:w-1/3">
         <input
           {...register("searchValue")}
           type="text"

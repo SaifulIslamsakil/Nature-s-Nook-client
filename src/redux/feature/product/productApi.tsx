@@ -46,7 +46,7 @@ const productApi = baseApi.injectEndpoints({
         }),
         uploadImages: builder.mutation({
             query: (payload) => ({
-                url: "https://api.imgbb.com/1/upload?4f0141f09181eae5680c48d40b51f217",
+                url: "https://api.imgbb.com/1/upload?key=8e63e023b6716f56295b0c1df1b0048a",
                 method:"POST",
                 body:payload
             }),

@@ -20,7 +20,7 @@ const Menu = () => {
             path: "/product-management"
         },
         {
-            name: "My cart",
+            name: "My Cart",
             path: "/cart"
         },
         {

@@ -39,10 +39,10 @@ const ProductForm = ({ setFormTigger, formAction }: Tprops) => {
     const { register, handleSubmit } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-        const imageFiles = [formData.img1[0], formData.img2[0], formData.img3[0]];
-        const uploadedImageUrls = await Promise.all(
-            imageFiles.map(file => uploadImageToCloudinary(file))
-        );
+        const imageFiles = formData?.img1[0]
+        const responsee = await uploadImages(imageFiles)
+        console.log(imageFiles)
+        console.log(imageData)
         let response
         // const productInfo = {
         //     name: formData.name,

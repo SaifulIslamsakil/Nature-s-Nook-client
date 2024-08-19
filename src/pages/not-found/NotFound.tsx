@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {
   return (
@@ -7,12 +8,12 @@ const NotFoundPage = () => {
       <p className="text-lg text-gray-500 mt-2 text-center">
         Oops! The page you are looking for does not exist. It might have been moved or deleted.
       </p>
-      <a
-        href="/"
-        className="mt-6 px-6 py-2 bg-green-700 text-white font-semibold rounded hover:bg-green-800"
+      <Link
+        to="/"
+        className="mt-6 px-6 py-2 bg-orange-500 text-white font-semibold rounded hover:bg-orange-700"
       >
         BACK TO HOMEPAGE
-      </a>
+      </Link>
     </div>
   );
 };
