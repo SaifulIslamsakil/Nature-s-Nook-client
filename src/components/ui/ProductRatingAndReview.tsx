@@ -2,6 +2,7 @@
 import { TProduct } from '@/interface/interface';
 import Rating from 'react-rating';
 import ProductCard from '@/components/ui/ProductCard';
+import { useGetProductReviewQuery } from '@/redux/feature/productReaview/productReviewApi';
 interface RatingDistribution {
     star: number;
     count: number;
@@ -20,16 +21,22 @@ interface RatingComponentProps {
     totalRatings: number;
     ratingDistribution: RatingDistribution[];
     reviews: Review[];
-    notMacthProduct:TProduct[]
+    notMacthProduct: TProduct[]
+    id: string
 }
 
 const ProductRatingAndReview: React.FC<RatingComponentProps> = ({ rating,
     totalRatings,
     ratingDistribution,
     reviews,
-    notMacthProduct
+    notMacthProduct,
+    id
 
 }) => {
+    const { data, error, isLoading } = useGetProductReviewQuery(id)
+    console.log(data)
+    console.log(error)
+    
     return (
         <div className="  grid grid-cols-4 gap-3 pb-10  shadow-md ">
             <div className='col-span-4 lg:col-span-3 bg-white'>
@@ -104,9 +111,9 @@ const ProductRatingAndReview: React.FC<RatingComponentProps> = ({ rating,
                 </div>
             </div>
             <div className=' col-span-4  space-y-2 px-5 grid md:grid-cols-3 md:gap-3  lg:grid-cols-1  md:space-y-0 lg:col-span-1 lg:space-y-2 '>
-                        {
-                            notMacthProduct.map(product => <ProductCard key={product?._id} product={product}/>)
-                        }
+                {
+                    notMacthProduct.map(product => <ProductCard key={product?._id} product={product} />)
+                }
             </div>
         </div>
     );

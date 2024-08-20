@@ -73,7 +73,7 @@ const ProductDetiles: React.FC = () => {
         ],
         reviews: [
             {
-                rating:3.2,
+                
                 user: 'Muntasir',
                 verified: true,
                 comment: ' Thanks Natures Nooks for this wonderful light at such a low price. Highly recommended.',
@@ -189,6 +189,7 @@ const ProductDetiles: React.FC = () => {
                     ratingDistribution={ratingData.ratingDistribution}
                     reviews={ratingData.reviews}
                     notMacthProduct={relatedProduct}
+                    id={product!._id}
                 />
             </div>
         </div>
